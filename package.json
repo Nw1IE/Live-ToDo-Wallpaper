@@ -1,18 +1,11 @@
 {
   "name": "desktop-notes",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "type": "module",
+  "scripts": {
+    "dev": "node js/index.js"
+  },
   "dependencies": {
-    "canvas": "^3.2.3",
-    "wallpaper": "^7.3.1",
-    "ws": "^8.20.1"
+    "node-windows": "^2.4.1"
   }
 }

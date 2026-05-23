@@ -7,7 +7,6 @@ import { WebSocketServer } from 'ws';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Так как index.js теперь в папке js/, корень проекта (ROOT) находится на уровень выше
 const ROOT_PATH = path.join(__dirname, '..');
 const TXT_PATH = path.join(ROOT_PATH, 'todo.txt');
 
@@ -65,14 +64,13 @@ function generateCardsHTML() {
     `;
 }
 
-// HTTP Сервер
 const server = http.createServer((req, res) => {
-    // Отдаем index.html из корня
+
     if (req.url === '/' || req.url === '/index.html') {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         res.end(fs.readFileSync(path.join(ROOT_PATH, 'index.html')));
     } 
-    // Отдаем стили из папки css/
+
     else if (req.url === '/css/style.css') {
         const cssPath = path.join(ROOT_PATH, 'css', 'style.css');
         if (fs.existsSync(cssPath)) {
@@ -82,7 +80,7 @@ const server = http.createServer((req, res) => {
             res.writeHead(404); res.end();
         }
     }
-    // Отдаем видео из твоей новой папки video/
+
     else if (req.url === '/video/video.mp4') {
         const videoPath = path.join(ROOT_PATH, 'video', 'video.mp4');
         if (!fs.existsSync(videoPath)) {
@@ -119,7 +117,6 @@ server.listen(3000, () => {
     console.log('HTTP Сервер успешно перезапущен с учетом новой структуры на http://localhost:3000');
 });
 
-// WebSocket Сервер
 const wss = new WebSocketServer({ port: 8080 });
 wss.on('connection', (ws) => {
     ws.send(generateCardsHTML());
